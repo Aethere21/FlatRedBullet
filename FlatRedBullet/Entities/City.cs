@@ -32,7 +32,7 @@ namespace FlatRedBullet.Entities
 	{
         DrawableBatchControl control = new DrawableBatchControl();
         ModelDrawableBatch model = new ModelDrawableBatch("Content/GlobalContent/Models/CityModel", true);
-        List<AxisAlignedCube> collisionCubes = new List<AxisAlignedCube>();
+        public List<AxisAlignedCube> collisionCubes = new List<AxisAlignedCube>();
 		
         private void CustomInitialize()
 		{

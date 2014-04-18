@@ -14,7 +14,7 @@ namespace FlatRedBullet.Screens
     public partial class GameScreen : Screen
     {
         private bool debugMode;
-        private float cameraMovementSpeed = 15f;
+        private float cameraMovementSpeed = 100f;
         private float cameraRotationSpeed = 0.006f;
         private void SetUpCamera(bool _debug)
         {
@@ -23,6 +23,12 @@ namespace FlatRedBullet.Screens
             Camera.Main.UpVector = new Vector3(0, 1, 0);
             Camera.Main.CameraCullMode = FlatRedBall.Graphics.CameraCullMode.None;
             Camera.Main.FarClipPlane = 5000.0f;
+
+            if(!debugMode)
+            {
+                Camera.Main.AttachTo(PlayerInstance, false);
+                Camera.Main.RelativePosition.Y = 4;
+            }
         }
 
         private void CameraActivity()
@@ -33,44 +39,93 @@ namespace FlatRedBullet.Screens
 
         private void CameraMovement()
         {
-            if (InputManager.Keyboard.KeyDown(Keys.W))
+            if (debugMode)
             {
-                SpriteManager.Camera.Position += SpriteManager.Camera.RotationMatrix.Forward * cameraMovementSpeed;
-            }
-            else if (InputManager.Keyboard.KeyDown(Keys.S))
-            {
-                SpriteManager.Camera.Position += SpriteManager.Camera.RotationMatrix.Forward * -cameraMovementSpeed;
-            }
+                if (InputManager.Keyboard.KeyDown(Keys.W))
+                {
+                    SpriteManager.Camera.Position += SpriteManager.Camera.RotationMatrix.Forward * cameraMovementSpeed;
+                }
+                else if (InputManager.Keyboard.KeyDown(Keys.S))
+                {
+                    SpriteManager.Camera.Position += SpriteManager.Camera.RotationMatrix.Forward * -cameraMovementSpeed;
+                }
 
-            if (InputManager.Keyboard.KeyDown(Keys.A))
-            {
-                SpriteManager.Camera.Position += SpriteManager.Camera.RotationMatrix.Right * -cameraMovementSpeed;
-            }
-            else if (InputManager.Keyboard.KeyDown(Keys.D))
-            {
-                SpriteManager.Camera.Position += SpriteManager.Camera.RotationMatrix.Right * cameraMovementSpeed;
-            }
+                if (InputManager.Keyboard.KeyDown(Keys.A))
+                {
+                    SpriteManager.Camera.Position += SpriteManager.Camera.RotationMatrix.Right * -cameraMovementSpeed;
+                }
+                else if (InputManager.Keyboard.KeyDown(Keys.D))
+                {
+                    SpriteManager.Camera.Position += SpriteManager.Camera.RotationMatrix.Right * cameraMovementSpeed;
+                }
 
-            if (InputManager.Keyboard.KeyDown(Keys.Q))
-            {
-                SpriteManager.Camera.Position += SpriteManager.Camera.RotationMatrix.Up * cameraMovementSpeed;
+                if (InputManager.Keyboard.KeyDown(Keys.Q))
+                {
+                    SpriteManager.Camera.Position += SpriteManager.Camera.RotationMatrix.Up * cameraMovementSpeed;
+                }
+                else if (InputManager.Keyboard.KeyDown(Keys.E))
+                {
+                    SpriteManager.Camera.Position += SpriteManager.Camera.RotationMatrix.Up * -cameraMovementSpeed;
+                }
             }
-            else if (InputManager.Keyboard.KeyDown(Keys.E))
+            else
             {
-                SpriteManager.Camera.Position += SpriteManager.Camera.RotationMatrix.Up * -cameraMovementSpeed;
+                Vector3 right = PlayerInstance.RotationMatrix.Right;
+                Vector3 projectedForward = PlayerInstance.RotationMatrix.Forward;
+
+                projectedForward.Y = 0;
+                if(projectedForward.LengthSquared() != 0)
+                {
+                    projectedForward.Normalize();
+                }
+
+                PlayerInstance.XVelocity = 0;
+                PlayerInstance.ZVelocity = 0;
+
+                if (InputManager.Keyboard.KeyDown(Keys.W))
+                {
+                    PlayerInstance.Velocity += projectedForward * cameraMovementSpeed;
+                }
+                else if (InputManager.Keyboard.KeyDown(Keys.S))
+                {
+                    PlayerInstance.Velocity += projectedForward * -cameraMovementSpeed;
+                }
+
+                if (InputManager.Keyboard.KeyDown(Keys.A))
+                {
+                    PlayerInstance.Velocity += right * -cameraMovementSpeed;
+                }
+                else if (InputManager.Keyboard.KeyDown(Keys.D))
+                {
+                    PlayerInstance.Velocity += right * cameraMovementSpeed;
+                }
             }
         }
 
         private void CameraRotation()
         {
-            int xMovement = GuiManager.Cursor.ScreenXChange;
-            int yMovement = GuiManager.Cursor.ScreenYChange;
+            if (debugMode)
+            {
+                int xMovement = GuiManager.Cursor.ScreenXChange;
+                int yMovement = GuiManager.Cursor.ScreenYChange;
 
-            Vector3 absoluteYAxis = new Vector3(0, 1, 0);
-            Camera.Main.RotationMatrix *= Microsoft.Xna.Framework.Matrix.CreateFromAxisAngle(absoluteYAxis, xMovement * -cameraRotationSpeed);
+                Vector3 absoluteYAxis = new Vector3(0, 1, 0);
+                Camera.Main.RotationMatrix *= Microsoft.Xna.Framework.Matrix.CreateFromAxisAngle(absoluteYAxis, xMovement * -cameraRotationSpeed);
 
-            Vector3 relativeXAxis = Camera.Main.RotationMatrix.Right;
-            Camera.Main.RotationMatrix *= Microsoft.Xna.Framework.Matrix.CreateFromAxisAngle(relativeXAxis, yMovement * -cameraRotationSpeed);
+                Vector3 relativeXAxis = Camera.Main.RotationMatrix.Right;
+                Camera.Main.RotationMatrix *= Microsoft.Xna.Framework.Matrix.CreateFromAxisAngle(relativeXAxis, yMovement * -cameraRotationSpeed);
+            }
+            else
+            {
+                int xMovement = GuiManager.Cursor.ScreenXChange;
+                int yMovement = GuiManager.Cursor.ScreenYChange;
+
+                Vector3 absoluteYAxis = new Vector3(0, 1, 0);
+                PlayerInstance.RotationMatrix *= Microsoft.Xna.Framework.Matrix.CreateFromAxisAngle(absoluteYAxis, xMovement * -cameraRotationSpeed);
+
+                //Vector3 relativeXAxis = Camera.Main.RotationMatrix.Right;
+                //PlayerInstance.RotationMatrix *= Microsoft.Xna.Framework.Matrix.CreateFromAxisAngle(relativeXAxis, yMovement * -cameraRotationSpeed);
+            }
         }
     }
 }

@@ -35,7 +35,7 @@ namespace FlatRedBullet
 		static string ContentManagerName = "Global";
 		public static void Initialize ()
 		{
-
+			
 						IsInitialized = true;
 		}
 		public static void Reload (object whatToReload)

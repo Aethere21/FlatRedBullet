@@ -20,6 +20,8 @@ using GuiManager = FlatRedBall.Gui.GuiManager;
 using Keys = Microsoft.Xna.Framework.Input.Keys;
 using Vector3 = Microsoft.Xna.Framework.Vector3;
 using Texture2D = Microsoft.Xna.Framework.Graphics.Texture2D;
+using FlatRedBullet.DrawableBatches;
+using Microsoft.Xna.Framework;
 
 #endif
 #endregion
@@ -28,21 +30,27 @@ namespace FlatRedBullet.Entities
 {
 	public partial class Player
 	{
+        public AxisAlignedCube collisionCube = new AxisAlignedCube();
+
 		private void CustomInitialize()
 		{
+            collisionCube.ScaleX = 4;
+            collisionCube.ScaleZ = 4;
+            collisionCube.ScaleY = 6;
+            collisionCube.Position.Y = 25;
+            collisionCube.Color = Color.Green;
+            collisionCube.Visible = true;
 
-
+            collisionCube.AttachTo(this, false);
 		}
 
 		private void CustomActivity()
 		{
 
-
 		}
 
 		private void CustomDestroy()
 		{
-
 
 		}
 

@@ -32,7 +32,7 @@ namespace FlatRedBullet.Screens
 
 		void CustomInitialize()
 		{
-            SetUpCamera(true);
+            SetUpCamera(false);
 
 		}
 
@@ -40,6 +40,14 @@ namespace FlatRedBullet.Screens
 		{
             CameraActivity();
 
+            FlatRedBall.Debugging.Debugger.Write("Camera Position: " + Camera.Main.Position + "PlayerCube Position: " + PlayerInstance.collisionCube.Position);
+
+            foreach(AxisAlignedCube cube in CityInstance.collisionCubes)
+            {
+                PlayerInstance.collisionCube.CollideAgainstMove(cube, 0, 1);
+            }
+
+            PlayerInstance.YVelocity = -10;
 		}
 
 		void CustomDestroy()

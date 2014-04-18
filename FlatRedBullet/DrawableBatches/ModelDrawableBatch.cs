@@ -57,7 +57,7 @@ namespace FlatRedBullet.DrawableBatches
             {
                 foreach (BasicEffect effect in mesh.Effects)
                 {
-                    //effect.EnableDefaultLighting();
+                    effect.EnableDefaultLighting();
                     effect.World = transforms[mesh.ParentBone.Index] * Matrix.CreateFromQuaternion(rotationQuaternion) * Matrix.CreateTranslation(this.Position);
                     effect.View = Camera.Main.View;
                     effect.Projection = Camera.Main.Projection;
