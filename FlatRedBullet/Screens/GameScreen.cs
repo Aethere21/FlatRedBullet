@@ -33,7 +33,7 @@ namespace FlatRedBullet.Screens
 		void CustomInitialize()
 		{
             SetUpCamera(false);
-
+            FlatRedBallServices.Game.IsMouseVisible = true;
 		}
 
 		void CustomActivity(bool firstTimeCalled)
@@ -46,8 +46,6 @@ namespace FlatRedBullet.Screens
             {
                 PlayerInstance.collisionCube.CollideAgainstMove(cube, 0, 1);
             }
-
-            PlayerInstance.YVelocity = -10;
 		}
 
 		void CustomDestroy()

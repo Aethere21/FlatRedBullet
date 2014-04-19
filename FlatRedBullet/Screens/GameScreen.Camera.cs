@@ -14,8 +14,10 @@ namespace FlatRedBullet.Screens
     public partial class GameScreen : Screen
     {
         private bool debugMode;
-        private float cameraMovementSpeed = 100f;
+        private float cameraMovementSpeed = 50f;
         private float cameraRotationSpeed = 0.006f;
+
+        MouseState originalMouseState;
         private void SetUpCamera(bool _debug)
         {
             debugMode = _debug;
@@ -28,6 +30,8 @@ namespace FlatRedBullet.Screens
             {
                 Camera.Main.AttachTo(PlayerInstance, false);
                 Camera.Main.RelativePosition.Y = 4;
+                Microsoft.Xna.Framework.Input.Mouse.SetPosition(FlatRedBallServices.GraphicsDevice.Viewport.Width / 2, FlatRedBallServices.GraphicsDevice.Viewport.Height / 2);
+                originalMouseState = Microsoft.Xna.Framework.Input.Mouse.GetState();
             }
         }
 
@@ -70,6 +74,7 @@ namespace FlatRedBullet.Screens
             }
             else
             {
+                PlayerInstance.YVelocity = -10;
                 Vector3 right = PlayerInstance.RotationMatrix.Right;
                 Vector3 projectedForward = PlayerInstance.RotationMatrix.Forward;
 
@@ -117,14 +122,23 @@ namespace FlatRedBullet.Screens
             }
             else
             {
-                int xMovement = GuiManager.Cursor.ScreenXChange;
-                int yMovement = GuiManager.Cursor.ScreenYChange;
+                //int xMovement = GuiManager.Cursor.ScreenXChange;
+                //int yMovement = GuiManager.Cursor.ScreenYChange;
+
+                //Vector3 absoluteYAxis = new Vector3(0, 1, 0);
+                //PlayerInstance.RotationMatrix *= Microsoft.Xna.Framework.Matrix.CreateFromAxisAngle(absoluteYAxis, xMovement * -cameraRotationSpeed);
+
+                ////Vector3 relativeXAxis = Camera.Main.RotationMatrix.Right;
+                ////PlayerInstance.RotationMatrix *= Microsoft.Xna.Framework.Matrix.CreateFromAxisAngle(relativeXAxis, yMovement * -cameraRotationSpeed);
+                MouseState currentMouseState = Microsoft.Xna.Framework.Input.Mouse.GetState();
+
+                float xMovement = currentMouseState.X - originalMouseState.X;
+                //float yMovement = currentMouseState.Y - originalMouseState.Y;
 
                 Vector3 absoluteYAxis = new Vector3(0, 1, 0);
-                PlayerInstance.RotationMatrix *= Microsoft.Xna.Framework.Matrix.CreateFromAxisAngle(absoluteYAxis, xMovement * -cameraRotationSpeed);
+                PlayerInstance.RotationMatrix *= Matrix.CreateFromAxisAngle(absoluteYAxis, xMovement * -cameraRotationSpeed);
 
-                //Vector3 relativeXAxis = Camera.Main.RotationMatrix.Right;
-                //PlayerInstance.RotationMatrix *= Microsoft.Xna.Framework.Matrix.CreateFromAxisAngle(relativeXAxis, yMovement * -cameraRotationSpeed);
+                Microsoft.Xna.Framework.Input.Mouse.SetPosition(FlatRedBallServices.GraphicsDevice.Viewport.Width / 2, FlatRedBallServices.GraphicsDevice.Viewport.Height / 2);
             }
         }
     }
