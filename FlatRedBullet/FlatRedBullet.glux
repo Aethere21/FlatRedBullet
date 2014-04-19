@@ -317,12 +317,6 @@
   </Entities>
   <GlobalFiles>
     <ReferencedFileSave>
-      <Properties>
-        <PropertySave>
-          <Name>UseContentPipeline</Name>
-          <ValueAsBool>true</ValueAsBool>
-        </PropertySave>
-      </Properties>
       <Name>GlobalContent/Models/CityModel.fbx</Name>
       <IsSharedStatic>true</IsSharedStatic>
       <HasPublicProperty>true</HasPublicProperty>
