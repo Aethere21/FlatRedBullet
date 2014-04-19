@@ -122,14 +122,6 @@ namespace FlatRedBullet.Screens
             }
             else
             {
-                //int xMovement = GuiManager.Cursor.ScreenXChange;
-                //int yMovement = GuiManager.Cursor.ScreenYChange;
-
-                //Vector3 absoluteYAxis = new Vector3(0, 1, 0);
-                //PlayerInstance.RotationMatrix *= Microsoft.Xna.Framework.Matrix.CreateFromAxisAngle(absoluteYAxis, xMovement * -cameraRotationSpeed);
-
-                ////Vector3 relativeXAxis = Camera.Main.RotationMatrix.Right;
-                ////PlayerInstance.RotationMatrix *= Microsoft.Xna.Framework.Matrix.CreateFromAxisAngle(relativeXAxis, yMovement * -cameraRotationSpeed);
                 MouseState currentMouseState = Microsoft.Xna.Framework.Input.Mouse.GetState();
 
                 float xMovement = currentMouseState.X - originalMouseState.X;
@@ -137,6 +129,8 @@ namespace FlatRedBullet.Screens
 
                 Vector3 absoluteYAxis = new Vector3(0, 1, 0);
                 PlayerInstance.RotationMatrix *= Matrix.CreateFromAxisAngle(absoluteYAxis, xMovement * -cameraRotationSpeed);
+                //Vector3 relativeXAxis = PlayerInstance.RotationMatrix.Right;
+                //PlayerInstance.RotationMatrix *= Matrix.CreateFromAxisAngle(relativeXAxis, yMovement * -cameraRotationSpeed);
 
                 Microsoft.Xna.Framework.Input.Mouse.SetPosition(FlatRedBallServices.GraphicsDevice.Viewport.Width / 2, FlatRedBallServices.GraphicsDevice.Viewport.Height / 2);
             }

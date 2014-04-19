@@ -33,20 +33,23 @@ namespace FlatRedBullet.Screens
 		void CustomInitialize()
 		{
             SetUpCamera(false);
-            FlatRedBallServices.Game.IsMouseVisible = true;
+            FlatRedBallServices.Game.IsMouseVisible = false;
 		}
 
-		void CustomActivity(bool firstTimeCalled)
-		{
-            CameraActivity();
+        void CustomActivity(bool firstTimeCalled)
+        {
+            if (FlatRedBallServices.Game.IsActive)
+            {
+                CameraActivity();
 
-            FlatRedBall.Debugging.Debugger.Write("Camera Position: " + Camera.Main.Position + "PlayerCube Position: " + PlayerInstance.collisionCube.Position);
+                FlatRedBall.Debugging.Debugger.Write("Camera Position: " + Camera.Main.Position + "PlayerCube Position: " + PlayerInstance.collisionCube.Position);
 
-            foreach(AxisAlignedCube cube in CityInstance.collisionCubes)
+            }
+            foreach (AxisAlignedCube cube in CityInstance.collisionCubes)
             {
                 PlayerInstance.collisionCube.CollideAgainstMove(cube, 0, 1);
             }
-		}
+        }
 
 		void CustomDestroy()
 		{

@@ -45,6 +45,8 @@ namespace FlatRedBullet
 			CameraSetup.SetupCamera(SpriteManager.Camera, graphics);
 			GlobalContent.Initialize();
 
+            FlatRedBallServices.GraphicsOptions.TextureFilter = TextureFilter.Point;
+
 			FlatRedBall.Screens.ScreenManager.Start(typeof(FlatRedBullet.Screens.GameScreen));
 
             base.Initialize();
