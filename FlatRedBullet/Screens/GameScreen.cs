@@ -29,11 +29,17 @@ namespace FlatRedBullet.Screens
 {
 	public partial class GameScreen
 	{
+        DrawableBatches.GuiDrawableBatch gui = new DrawableBatches.GuiDrawableBatch();
 
 		void CustomInitialize()
 		{
             SetUpCamera(false);
             FlatRedBallServices.Game.IsMouseVisible = false;
+
+            SpriteManager.AddZBufferedDrawableBatch(gui);
+            SpriteManager.AddPositionedObject(gui);
+
+            SetUpGun();
 		}
 
         void CustomActivity(bool firstTimeCalled)
@@ -42,13 +48,10 @@ namespace FlatRedBullet.Screens
             {
                 CameraActivity();
 
-                FlatRedBall.Debugging.Debugger.Write("Camera Position: " + Camera.Main.Position + "PlayerCube Position: " + PlayerInstance.collisionCube.Position);
+                FlatRedBall.Debugging.Debugger.Write("Gun Pos: " + GunInstance.RelativePosition + "\nGunRotationX: " + GunInstance.RelativeRotationX + "\nRY: " + GunInstance.RelativeRotationY + "\nRZ: " + GunInstance.RelativeRotationZ);
+            }
 
-            }
-            foreach (AxisAlignedCube cube in CityInstance.collisionCubes)
-            {
-                PlayerInstance.collisionCube.CollideAgainstMove(cube, 0, 1);
-            }
+            CollisionActivity();
         }
 
 		void CustomDestroy()
@@ -63,5 +66,22 @@ namespace FlatRedBullet.Screens
 
         }
 
+        private void CollisionActivity()
+        {
+            foreach (AxisAlignedCube cube in CityInstance.collisionCubes)
+            {
+                PlayerInstance.collisionCube.CollideAgainstMove(cube, 0, 1);
+            }
+        }
+
+        private void SetUpGun()
+        {
+            GunInstance.AttachTo(Camera.Main, true);
+
+            GunInstance.RelativeRotationY = 1.6f;
+
+            GunInstance.RelativePosition.Y = -2;
+            GunInstance.RelativePosition.Z = -10.5f;
+        }
 	}
 }

@@ -39,7 +39,6 @@ namespace FlatRedBullet.Screens
 		
 		private FlatRedBullet.Entities.City CityInstance;
 		private PositionedObjectList<FlatRedBullet.Entities.Enemy> EnemyList;
-		private PositionedObjectList<FlatRedBullet.Entities.EnemyBullet> EnemyBulletList;
 		private PositionedObjectList<FlatRedBullet.Entities.PlayerBullet> PlayerBulletList;
 		private FlatRedBullet.Entities.Player PlayerInstance;
 		private FlatRedBullet.Entities.Gun GunInstance;
@@ -57,8 +56,6 @@ namespace FlatRedBullet.Screens
 			CityInstance.Name = "CityInstance";
 			EnemyList = new PositionedObjectList<FlatRedBullet.Entities.Enemy>();
 			EnemyList.Name = "EnemyList";
-			EnemyBulletList = new PositionedObjectList<FlatRedBullet.Entities.EnemyBullet>();
-			EnemyBulletList.Name = "EnemyBulletList";
 			PlayerBulletList = new PositionedObjectList<FlatRedBullet.Entities.PlayerBullet>();
 			PlayerBulletList.Name = "PlayerBulletList";
 			PlayerInstance = new FlatRedBullet.Entities.Player(ContentManagerName, false);
@@ -79,7 +76,6 @@ namespace FlatRedBullet.Screens
 // Generated AddToManagers
 		public override void AddToManagers ()
 		{
-			EnemyBulletFactory.Initialize(EnemyBulletList, ContentManagerName);
 			PlayerBulletFactory.Initialize(PlayerBulletList, ContentManagerName);
 			CityInstance.AddToManagers(mLayer);
 			PlayerInstance.AddToManagers(mLayer);
@@ -103,14 +99,6 @@ namespace FlatRedBullet.Screens
 					{
 						// We do the extra if-check because activity could destroy any number of entities
 						EnemyList[i].Activity();
-					}
-				}
-				for (int i = EnemyBulletList.Count - 1; i > -1; i--)
-				{
-					if (i < EnemyBulletList.Count)
-					{
-						// We do the extra if-check because activity could destroy any number of entities
-						EnemyBulletList[i].Activity();
 					}
 				}
 				for (int i = PlayerBulletList.Count - 1; i > -1; i--)
@@ -142,11 +130,9 @@ namespace FlatRedBullet.Screens
 		public override void Destroy()
 		{
 			// Generated Destroy
-			EnemyBulletFactory.Destroy();
 			PlayerBulletFactory.Destroy();
 			
 			EnemyList.MakeOneWay();
-			EnemyBulletList.MakeOneWay();
 			PlayerBulletList.MakeOneWay();
 			if (CityInstance != null)
 			{
@@ -156,10 +142,6 @@ namespace FlatRedBullet.Screens
 			for (int i = EnemyList.Count - 1; i > -1; i--)
 			{
 				EnemyList[i].Destroy();
-			}
-			for (int i = EnemyBulletList.Count - 1; i > -1; i--)
-			{
-				EnemyBulletList[i].Destroy();
 			}
 			for (int i = PlayerBulletList.Count - 1; i > -1; i--)
 			{
@@ -176,7 +158,6 @@ namespace FlatRedBullet.Screens
 				GunInstance.Detach();
 			}
 			EnemyList.MakeTwoWay();
-			EnemyBulletList.MakeTwoWay();
 			PlayerBulletList.MakeTwoWay();
 
 			base.Destroy();
@@ -204,10 +185,6 @@ namespace FlatRedBullet.Screens
 			{
 				EnemyList[i].Destroy();
 			}
-			for (int i = EnemyBulletList.Count - 1; i > -1; i--)
-			{
-				EnemyBulletList[i].Destroy();
-			}
 			for (int i = PlayerBulletList.Count - 1; i > -1; i--)
 			{
 				PlayerBulletList[i].Destroy();
@@ -230,10 +207,6 @@ namespace FlatRedBullet.Screens
 			for (int i = 0; i < EnemyList.Count; i++)
 			{
 				EnemyList[i].ConvertToManuallyUpdated();
-			}
-			for (int i = 0; i < EnemyBulletList.Count; i++)
-			{
-				EnemyBulletList[i].ConvertToManuallyUpdated();
 			}
 			for (int i = 0; i < PlayerBulletList.Count; i++)
 			{

@@ -37,12 +37,11 @@ namespace FlatRedBullet.Entities
         private void CustomInitialize()
 		{
             control.LoadModel(model);
-            collisionCubes = control.CreateCube(model, true, Color.Green);
+            collisionCubes = control.CreateCube(model, false, Color.Green);
 		}
 
 		private void CustomActivity()
 		{
-            LightControl();
             model.Update();
 		}
 
@@ -55,11 +54,6 @@ namespace FlatRedBullet.Entities
         private static void CustomLoadStaticContent(string contentManagerName)
         {
 
-
-        }
-
-        private void LightControl()
-        {
 
         }
 	}

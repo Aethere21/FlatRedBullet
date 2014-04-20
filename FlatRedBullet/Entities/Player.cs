@@ -39,8 +39,8 @@ namespace FlatRedBullet.Entities
             collisionCube.ScaleY = 6;
             collisionCube.Position.Y = 25;
             collisionCube.Color = Color.Green;
-            collisionCube.Visible = true;
-
+            collisionCube.Visible = false;
+            
             collisionCube.AttachTo(this, false);
 		}
 

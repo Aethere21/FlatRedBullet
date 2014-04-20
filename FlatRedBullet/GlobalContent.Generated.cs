@@ -15,11 +15,14 @@ namespace FlatRedBullet
 	public static partial class GlobalContent
 	{
 		
+		public static Microsoft.Xna.Framework.Graphics.Texture2D Crosshair { get; set; }
 		[System.Obsolete("Use GetFile instead")]
 		public static object GetStaticMember (string memberName)
 		{
 			switch(memberName)
 			{
+				case  "Crosshair":
+					return Crosshair;
 			}
 			return null;
 		}
@@ -27,6 +30,8 @@ namespace FlatRedBullet
 		{
 			switch(memberName)
 			{
+				case  "Crosshair":
+					return Crosshair;
 			}
 			return null;
 		}
@@ -36,6 +41,7 @@ namespace FlatRedBullet
 		public static void Initialize ()
 		{
 			
+			Crosshair = FlatRedBallServices.Load<Microsoft.Xna.Framework.Graphics.Texture2D>(@"content/globalcontent/textures/crosshair.png", ContentManagerName);
 						IsInitialized = true;
 		}
 		public static void Reload (object whatToReload)

@@ -115,6 +115,7 @@
   <ItemGroup>
     <Compile Include="DataTypes\TileMapInfo.Generated.cs" />
     <Compile Include="DrawableBatches\DrawableBatchControl.cs" />
+    <Compile Include="DrawableBatches\GuiDrawableBatch.cs" />
     <Compile Include="DrawableBatches\ModelDrawableBatch.cs" />
     <Compile Include="Entities\City.cs" />
     <Compile Include="Entities\City.Generated.cs">
@@ -123,14 +124,6 @@
     <Compile Include="Entities\Enemy.cs" />
     <Compile Include="Entities\Enemy.Generated.cs">
       <DependentUpon>Enemy.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Entities\EnemyBullet.cs" />
-    <Compile Include="Entities\EnemyBullet.Generated.cs">
-      <DependentUpon>EnemyBullet.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Entities\GUI.cs" />
-    <Compile Include="Entities\GUI.Generated.cs">
-      <DependentUpon>GUI.cs</DependentUpon>
     </Compile>
     <Compile Include="Entities\Gun.cs" />
     <Compile Include="Entities\Gun.Generated.cs">
@@ -144,7 +137,6 @@
     <Compile Include="Entities\PlayerBullet.Generated.cs">
       <DependentUpon>PlayerBullet.cs</DependentUpon>
     </Compile>
-    <Compile Include="Factories\EnemyBulletFactory.Generated.cs" />
     <Compile Include="Factories\PlayerBulletFactory.Generated.cs" />
     <Compile Include="GlobalContent.Generated.cs" />
     <Compile Include="Performance\IEntityFactory.Generated.cs" />

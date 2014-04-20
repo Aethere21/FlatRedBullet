@@ -47,9 +47,14 @@
       <Processor>ModelProcessor</Processor>
       <Name>CityModel</Name>
     </Compile>
+    <Compile Include="GlobalContent\Models\GunModel.fbx">
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <Name>GunModel</Name>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Entities\GUI\Crosshair.png">
+    <None Include="GlobalContent\Textures\Crosshair.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Name>Crosshair</Name>
     </None>
