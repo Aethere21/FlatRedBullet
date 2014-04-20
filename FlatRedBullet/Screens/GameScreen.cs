@@ -22,6 +22,7 @@ using FlatRedBall.Localization;
 using Keys = Microsoft.Xna.Framework.Input.Keys;
 using Vector3 = Microsoft.Xna.Framework.Vector3;
 using Texture2D = Microsoft.Xna.Framework.Graphics.Texture2D;
+using Microsoft.Xna.Framework;
 #endif
 #endregion
 
@@ -31,16 +32,16 @@ namespace FlatRedBullet.Screens
 	{
         DrawableBatches.GuiDrawableBatch gui = new DrawableBatches.GuiDrawableBatch();
 
-		void CustomInitialize()
+        void CustomInitialize()
 		{
             SetUpCamera(false);
             FlatRedBallServices.Game.IsMouseVisible = false;
 
             SpriteManager.AddZBufferedDrawableBatch(gui);
             SpriteManager.AddPositionedObject(gui);
-
             SetUpGun();
 		}
+
 
         void CustomActivity(bool firstTimeCalled)
         {
@@ -52,18 +53,19 @@ namespace FlatRedBullet.Screens
             }
 
             CollisionActivity();
+
+            BulletSpawnerInstance.RotationY = PlayerInstance.RotationY;
+
         }
 
 		void CustomDestroy()
 		{
-
-
+            SpriteManager.RemoveDrawableBatch(gui);
+            SpriteManager.RemovePositionedObject(gui);
 		}
 
         static void CustomLoadStaticContent(string contentManagerName)
         {
-
-
         }
 
         private void CollisionActivity()
@@ -77,11 +79,14 @@ namespace FlatRedBullet.Screens
         private void SetUpGun()
         {
             GunInstance.AttachTo(Camera.Main, true);
-
-            GunInstance.RelativeRotationY = 1.6f;
-
+            GunInstance.RelativeRotationY = 1.55f;
             GunInstance.RelativePosition.Y = -2;
             GunInstance.RelativePosition.Z = -10.5f;
+
+            BulletSpawnerInstance.AttachTo(Camera.Main, true);
+            BulletSpawnerInstance.RelativePosition.Y = -3.5f;
+            BulletSpawnerInstance.RelativePosition.Z = -20f;
+            BulletSpawnerInstance.RelativePosition.X = 2.5f;
         }
 	}
 }

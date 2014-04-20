@@ -42,6 +42,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GlobalContent\Models\BulletModel.fbx">
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <Name>BulletModel</Name>
+    </Compile>
     <Compile Include="GlobalContent\Models\CityModel.fbx">
       <Importer>FbxImporter</Importer>
       <Processor>ModelProcessor</Processor>

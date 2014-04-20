@@ -20,31 +20,46 @@ using GuiManager = FlatRedBall.Gui.GuiManager;
 using Keys = Microsoft.Xna.Framework.Input.Keys;
 using Vector3 = Microsoft.Xna.Framework.Vector3;
 using Texture2D = Microsoft.Xna.Framework.Graphics.Texture2D;
-using FlatRedBullet.DrawableBatches;
 using Microsoft.Xna.Framework;
+using FlatRedBullet.DrawableBatches;
 
 #endif
 #endregion
 
 namespace FlatRedBullet.Entities
 {
-	public partial class Gun
+	public partial class BulletSpawner
 	{
         DrawableBatchControl control = new DrawableBatchControl();
-        ModelDrawableBatch model = new ModelDrawableBatch("Content/GlobalContent/Models/GunModel", true);
+        ModelDrawableBatch model = new ModelDrawableBatch("Content/GlobalContent/Models/BulletModel", false);
 
+        AxisAlignedCube spawnCube = new AxisAlignedCube();
 		private void CustomInitialize()
 		{
             control.LoadModel(model);
 
             model.CopyAbsoluteToRelative();
-            model.AttachTo(this, false);
+            model.AttachTo(spawnCube, false);
+            spawnCube.ScaleX = 0.5f;
+            spawnCube.ScaleY = 0.5f;
+            spawnCube.ScaleZ = 0.5f;
+            spawnCube.CopyAbsoluteToRelative();
+            spawnCube.AttachTo(this, false);
 		}
 
-		private void CustomActivity()
-		{
-            model.Update();
-		}
+        private void CustomActivity()
+        {
+            if (InputManager.Mouse.ButtonReleased(Mouse.MouseButtons.LeftButton))
+            {
+                Entities.PlayerBullet bullet = new Entities.PlayerBullet();
+                bullet.RotationMatrix = Matrix.CreateFromAxisAngle(new Vector3(0, 1, 0), this.RotationY);
+                bullet.Position.Y = this.Position.Y + 1f;
+                bullet.Position.X = this.Position.X;
+                bullet.Position.Z = this.Position.Z;
+                Factories.PlayerBulletFactory.ScreenListReference.Add(bullet);
+            }
+
+        }
 
 		private void CustomDestroy()
 		{

@@ -117,6 +117,10 @@
     <Compile Include="DrawableBatches\DrawableBatchControl.cs" />
     <Compile Include="DrawableBatches\GuiDrawableBatch.cs" />
     <Compile Include="DrawableBatches\ModelDrawableBatch.cs" />
+    <Compile Include="Entities\BulletSpawner.cs" />
+    <Compile Include="Entities\BulletSpawner.Generated.cs">
+      <DependentUpon>BulletSpawner.cs</DependentUpon>
+    </Compile>
     <Compile Include="Entities\City.cs" />
     <Compile Include="Entities\City.Generated.cs">
       <DependentUpon>City.cs</DependentUpon>

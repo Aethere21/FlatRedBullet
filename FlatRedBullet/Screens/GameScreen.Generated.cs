@@ -42,6 +42,7 @@ namespace FlatRedBullet.Screens
 		private PositionedObjectList<FlatRedBullet.Entities.PlayerBullet> PlayerBulletList;
 		private FlatRedBullet.Entities.Player PlayerInstance;
 		private FlatRedBullet.Entities.Gun GunInstance;
+		private FlatRedBullet.Entities.BulletSpawner BulletSpawnerInstance;
 
 		public GameScreen()
 			: base("GameScreen")
@@ -62,6 +63,8 @@ namespace FlatRedBullet.Screens
 			PlayerInstance.Name = "PlayerInstance";
 			GunInstance = new FlatRedBullet.Entities.Gun(ContentManagerName, false);
 			GunInstance.Name = "GunInstance";
+			BulletSpawnerInstance = new FlatRedBullet.Entities.BulletSpawner(ContentManagerName, false);
+			BulletSpawnerInstance.Name = "BulletSpawnerInstance";
 			
 			
 			PostInitialize();
@@ -80,6 +83,7 @@ namespace FlatRedBullet.Screens
 			CityInstance.AddToManagers(mLayer);
 			PlayerInstance.AddToManagers(mLayer);
 			GunInstance.AddToManagers(mLayer);
+			BulletSpawnerInstance.AddToManagers(mLayer);
 			base.AddToManagers();
 			AddToManagersBottomUp();
 			CustomInitialize();
@@ -111,6 +115,7 @@ namespace FlatRedBullet.Screens
 				}
 				PlayerInstance.Activity();
 				GunInstance.Activity();
+				BulletSpawnerInstance.Activity();
 			}
 			else
 			{
@@ -157,6 +162,11 @@ namespace FlatRedBullet.Screens
 				GunInstance.Destroy();
 				GunInstance.Detach();
 			}
+			if (BulletSpawnerInstance != null)
+			{
+				BulletSpawnerInstance.Destroy();
+				BulletSpawnerInstance.Detach();
+			}
 			EnemyList.MakeTwoWay();
 			PlayerBulletList.MakeTwoWay();
 
@@ -191,6 +201,7 @@ namespace FlatRedBullet.Screens
 			}
 			PlayerInstance.RemoveFromManagers();
 			GunInstance.RemoveFromManagers();
+			BulletSpawnerInstance.RemoveFromManagers();
 		}
 		public virtual void AssignCustomVariables (bool callOnContainedElements)
 		{
@@ -199,6 +210,7 @@ namespace FlatRedBullet.Screens
 				CityInstance.AssignCustomVariables(true);
 				PlayerInstance.AssignCustomVariables(true);
 				GunInstance.AssignCustomVariables(true);
+				BulletSpawnerInstance.AssignCustomVariables(true);
 			}
 		}
 		public virtual void ConvertToManuallyUpdated ()
@@ -214,6 +226,7 @@ namespace FlatRedBullet.Screens
 			}
 			PlayerInstance.ConvertToManuallyUpdated();
 			GunInstance.ConvertToManuallyUpdated();
+			BulletSpawnerInstance.ConvertToManuallyUpdated();
 		}
 		public static void LoadStaticContent (string contentManagerName)
 		{
@@ -234,6 +247,7 @@ namespace FlatRedBullet.Screens
 			FlatRedBullet.Entities.City.LoadStaticContent(contentManagerName);
 			FlatRedBullet.Entities.Player.LoadStaticContent(contentManagerName);
 			FlatRedBullet.Entities.Gun.LoadStaticContent(contentManagerName);
+			FlatRedBullet.Entities.BulletSpawner.LoadStaticContent(contentManagerName);
 			CustomLoadStaticContent(contentManagerName);
 		}
 		[System.Obsolete("Use GetFile instead")]

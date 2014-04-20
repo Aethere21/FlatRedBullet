@@ -34,8 +34,8 @@ namespace FlatRedBullet.Entities
 
 		private void CustomInitialize()
 		{
-            collisionCube.ScaleX = 4;
-            collisionCube.ScaleZ = 4;
+            collisionCube.ScaleX = 8;
+            collisionCube.ScaleZ = 8;
             collisionCube.ScaleY = 6;
             collisionCube.Position.Y = 25;
             collisionCube.Color = Color.Green;
