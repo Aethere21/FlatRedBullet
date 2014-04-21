@@ -34,6 +34,9 @@ namespace FlatRedBullet.Entities
 
 		private void CustomInitialize()
 		{
+
+            GlobalData.PlayerData.Health = 100;
+
             collisionCube.ScaleX = 8;
             collisionCube.ScaleZ = 8;
             collisionCube.ScaleY = 6;
@@ -46,7 +49,6 @@ namespace FlatRedBullet.Entities
 
 		private void CustomActivity()
 		{
-
 		}
 
 		private void CustomDestroy()

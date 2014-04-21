@@ -62,12 +62,38 @@
       <Processor>ModelProcessor</Processor>
       <Name>ZombieModel</Name>
     </Compile>
+    <Compile Include="GlobalContent\Sounds\PlayerDeath.wav">
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Name>PlayerDeath</Name>
+    </Compile>
+    <Compile Include="GlobalContent\Sounds\PlayerHit.wav">
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Name>PlayerHit</Name>
+    </Compile>
+    <Compile Include="GlobalContent\Sounds\Shoot.wav">
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Name>Shoot</Name>
+    </Compile>
+    <Compile Include="GlobalContent\Sounds\ZombieDeath.wav">
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Name>ZombieDeath</Name>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="GlobalContent\Textures\Crosshair.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Name>Crosshair</Name>
     </None>
+    <Compile Include="GlobalContent\Textures\Font.spritefont">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Name>Font</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
   <!--  To modify your build process, add your task inside one of the targets below and uncomment it. 

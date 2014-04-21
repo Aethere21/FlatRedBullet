@@ -9,5 +9,8 @@ namespace FlatRedBullet
     public class PlayerData
     {
         public Vector3 playerPosition = new Vector3();
+        public int score;
+        public int Health;
+
     }
 }

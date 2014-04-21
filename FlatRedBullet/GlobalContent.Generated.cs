@@ -16,6 +16,10 @@ namespace FlatRedBullet
 	{
 		
 		public static Microsoft.Xna.Framework.Graphics.Texture2D Crosshair { get; set; }
+		public static Microsoft.Xna.Framework.Audio.SoundEffect PlayerDeath { get; set; }
+		public static Microsoft.Xna.Framework.Audio.SoundEffect Shoot { get; set; }
+		public static Microsoft.Xna.Framework.Audio.SoundEffect ZombieDeath { get; set; }
+		public static Microsoft.Xna.Framework.Audio.SoundEffect PlayerHit { get; set; }
 		[System.Obsolete("Use GetFile instead")]
 		public static object GetStaticMember (string memberName)
 		{
@@ -23,6 +27,14 @@ namespace FlatRedBullet
 			{
 				case  "Crosshair":
 					return Crosshair;
+				case  "PlayerDeath":
+					return PlayerDeath;
+				case  "Shoot":
+					return Shoot;
+				case  "ZombieDeath":
+					return ZombieDeath;
+				case  "PlayerHit":
+					return PlayerHit;
 			}
 			return null;
 		}
@@ -32,6 +44,14 @@ namespace FlatRedBullet
 			{
 				case  "Crosshair":
 					return Crosshair;
+				case  "PlayerDeath":
+					return PlayerDeath;
+				case  "Shoot":
+					return Shoot;
+				case  "ZombieDeath":
+					return ZombieDeath;
+				case  "PlayerHit":
+					return PlayerHit;
 			}
 			return null;
 		}
@@ -42,6 +62,10 @@ namespace FlatRedBullet
 		{
 			
 			Crosshair = FlatRedBallServices.Load<Microsoft.Xna.Framework.Graphics.Texture2D>(@"content/globalcontent/textures/crosshair.png", ContentManagerName);
+			PlayerDeath = FlatRedBallServices.Load<Microsoft.Xna.Framework.Audio.SoundEffect>(@"content/globalcontent/sounds/playerdeath", ContentManagerName);
+			Shoot = FlatRedBallServices.Load<Microsoft.Xna.Framework.Audio.SoundEffect>(@"content/globalcontent/sounds/shoot", ContentManagerName);
+			ZombieDeath = FlatRedBallServices.Load<Microsoft.Xna.Framework.Audio.SoundEffect>(@"content/globalcontent/sounds/zombiedeath", ContentManagerName);
+			PlayerHit = FlatRedBallServices.Load<Microsoft.Xna.Framework.Audio.SoundEffect>(@"content/globalcontent/sounds/playerhit", ContentManagerName);
 						IsInitialized = true;
 		}
 		public static void Reload (object whatToReload)

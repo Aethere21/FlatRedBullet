@@ -57,6 +57,7 @@ namespace FlatRedBullet.Entities
                 bullet.Position.X = this.Position.X;
                 bullet.Position.Z = this.Position.Z;
                 Factories.PlayerBulletFactory.ScreenListReference.Add(bullet);
+                GlobalContent.Shoot.Play(0.65f, 0, 0);
             }
         }
 

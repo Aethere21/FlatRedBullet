@@ -43,8 +43,6 @@ namespace FlatRedBullet.Entities
             model.AttachTo(cube, false);
 
             cube.AttachTo(this, false);
-            cube.Visible = true;
-            cube.Color = Color.Green;
             cube.ScaleX = 5;
             cube.ScaleY = 8;
             cube.ScaleZ = 4;
@@ -56,6 +54,8 @@ namespace FlatRedBullet.Entities
             if(this.health <= 0)
             {
                 this.Destroy();
+                GlobalData.PlayerData.score++;
+                GlobalContent.ZombieDeath.Play();
             }
 
             Vector3 directionToCenter = GlobalData.PlayerData.playerPosition - this.Position;

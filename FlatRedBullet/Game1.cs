@@ -23,7 +23,6 @@ namespace FlatRedBullet
     public class Game1 : Microsoft.Xna.Framework.Game
     {
         GraphicsDeviceManager graphics;
-
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -47,8 +46,8 @@ namespace FlatRedBullet
 
             FlatRedBallServices.GraphicsOptions.TextureFilter = TextureFilter.Point;
 
-			FlatRedBall.Screens.ScreenManager.Start(typeof(FlatRedBullet.Screens.GameScreen));
-
+			FlatRedBall.Screens.ScreenManager.Start(typeof(FlatRedBullet.Screens.MenuScreen));
+            
             base.Initialize();
         }
 

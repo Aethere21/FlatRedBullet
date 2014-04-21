@@ -57,10 +57,10 @@ namespace FlatRedBullet.Screens
         {
             if (FlatRedBallServices.Game.IsActive)
             {
-                CameraActivity();
-                //FlatRedBall.Debugging.Debugger.Write("SX: " + EnemyList[0].cube.ScaleX + "\nSY: " + EnemyList[0].cube.ScaleY + "\nSZ: " + EnemyList[0].cube.ScaleZ + "\nBulletAmmount: " + PlayerBulletList.Count + "\nZombie 1 Position: " + EnemyList[0].Position + );
-                FlatRedBall.Debugging.Debugger.Write(EnemyList.Count);
-                
+                if (!gui.GameOver)
+                {
+                    CameraActivity();
+                }
                 if(IsTimeToSpawn)
                 {
                     SpawnActivity();
@@ -70,8 +70,22 @@ namespace FlatRedBullet.Screens
                 GlobalData.PlayerData.playerPosition = PlayerInstance.Position;
             }
 
+            if (GlobalData.PlayerData.Health <= 0)
+            {
+                GlobalData.PlayerData.Health = 0;
+                gui.GameOver = true;
+
+                PlayerInstance.Position = new Vector3(10000, 1000, 1000);
+
+                if(InputManager.Keyboard.KeyReleased(Keys.Enter))
+                {
+                    MoveToScreen(typeof(MenuScreen));
+                }
+                
+            }
+
             CollisionActivity();
-            BulletActivity();
+            //BulletActivity();
         }
 
 		void CustomDestroy()
@@ -113,6 +127,15 @@ namespace FlatRedBullet.Screens
                         PlayerBulletList[x].Destroy();
                     }
                 }
+
+                if(PlayerInstance.collisionCube.CollideAgainstMove(EnemyList[i].cube, 0, 1))
+                {
+                    if (!gui.GameOver)
+                    {
+                        GlobalData.PlayerData.Health -= 1;
+                        GlobalContent.PlayerHit.Play(0.55f, 0, 0);
+                    }
+                }
             }
         }
 
@@ -129,10 +152,10 @@ namespace FlatRedBullet.Screens
             BulletSpawnerInstance.RelativePosition.X = 2.5f;
         }
 
-        private void BulletActivity()
-        {
-            BulletSpawnerInstance.RotationY = PlayerInstance.RotationY;
-        }
+        //private void BulletActivity()
+        //{
+        //    BulletSpawnerInstance.RotationY = PlayerInstance.RotationY;
+        //}
 
         private void SpawnActivity()
         {

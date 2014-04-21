@@ -43,6 +43,7 @@ namespace FlatRedBullet.Entities
 		private void CustomActivity()
 		{
             model.Update();
+
 		}
 
 		private void CustomDestroy()
