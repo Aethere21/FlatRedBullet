@@ -42,6 +42,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GlobalContent\Models\ArrowModel.fbx">
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <Name>ArrowModel</Name>
+    </Compile>
     <Compile Include="GlobalContent\Models\BulletModel.fbx">
       <Importer>FbxImporter</Importer>
       <Processor>ModelProcessor</Processor>
@@ -52,15 +57,30 @@
       <Processor>ModelProcessor</Processor>
       <Name>CityModel</Name>
     </Compile>
+    <Compile Include="GlobalContent\Models\ExitGameModel.fbx">
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <Name>ExitGameModel</Name>
+    </Compile>
     <Compile Include="GlobalContent\Models\GunModel.fbx">
       <Importer>FbxImporter</Importer>
       <Processor>ModelProcessor</Processor>
       <Name>GunModel</Name>
     </Compile>
+    <Compile Include="GlobalContent\Models\StartGameModel.fbx">
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <Name>StartGameModel</Name>
+    </Compile>
     <Compile Include="GlobalContent\Models\ZombieModel.fbx">
       <Importer>FbxImporter</Importer>
       <Processor>ModelProcessor</Processor>
       <Name>ZombieModel</Name>
+    </Compile>
+    <Compile Include="GlobalContent\Sounds\ChangeOption.wav">
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Name>ChangeOption</Name>
     </Compile>
     <Compile Include="GlobalContent\Sounds\PlayerDeath.wav">
       <Importer>WavImporter</Importer>
@@ -71,6 +91,11 @@
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
       <Name>PlayerHit</Name>
+    </Compile>
+    <Compile Include="GlobalContent\Sounds\Select.wav">
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Name>Select</Name>
     </Compile>
     <Compile Include="GlobalContent\Sounds\Shoot.wav">
       <Importer>WavImporter</Importer>

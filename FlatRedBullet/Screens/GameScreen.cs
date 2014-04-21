@@ -32,6 +32,8 @@ namespace FlatRedBullet.Screens
 	{
         DrawableBatches.GuiDrawableBatch gui = new DrawableBatches.GuiDrawableBatch();
 
+        bool deathSoundPlayed = false;
+
         double mLastSpawnTime;
         bool IsTimeToSpawn
         {
@@ -74,8 +76,13 @@ namespace FlatRedBullet.Screens
             {
                 GlobalData.PlayerData.Health = 0;
                 gui.GameOver = true;
-
                 PlayerInstance.Position = new Vector3(10000, 1000, 1000);
+
+                if (!deathSoundPlayed)
+                {
+                    GlobalContent.PlayerDeath.Play();
+                    deathSoundPlayed = true;
+                }
 
                 if(InputManager.Keyboard.KeyReleased(Keys.Enter))
                 {

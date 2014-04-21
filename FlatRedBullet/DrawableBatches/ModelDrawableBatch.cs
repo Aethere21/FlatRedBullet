@@ -17,6 +17,8 @@ namespace FlatRedBullet.DrawableBatches
         private bool drawModel;
         private bool addTexture;
 
+        public bool defaultLight = true;
+
         public Quaternion rotationQuaternion;
         public bool UpdateEveryFrame
         {
@@ -57,7 +59,10 @@ namespace FlatRedBullet.DrawableBatches
             {
                 foreach (BasicEffect effect in mesh.Effects)
                 {
-                    effect.EnableDefaultLighting();
+                    if (defaultLight)
+                    {
+                        effect.EnableDefaultLighting();
+                    }
                     effect.World = transforms[mesh.ParentBone.Index] * Matrix.CreateFromQuaternion(rotationQuaternion) * Matrix.CreateTranslation(this.Position);
                     effect.View = Camera.Main.View;
                     effect.Projection = Camera.Main.Projection;

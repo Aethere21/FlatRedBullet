@@ -20,6 +20,8 @@ namespace FlatRedBullet
 		public static Microsoft.Xna.Framework.Audio.SoundEffect Shoot { get; set; }
 		public static Microsoft.Xna.Framework.Audio.SoundEffect ZombieDeath { get; set; }
 		public static Microsoft.Xna.Framework.Audio.SoundEffect PlayerHit { get; set; }
+		public static Microsoft.Xna.Framework.Audio.SoundEffect ChangeOption { get; set; }
+		public static Microsoft.Xna.Framework.Audio.SoundEffect Select { get; set; }
 		[System.Obsolete("Use GetFile instead")]
 		public static object GetStaticMember (string memberName)
 		{
@@ -35,6 +37,10 @@ namespace FlatRedBullet
 					return ZombieDeath;
 				case  "PlayerHit":
 					return PlayerHit;
+				case  "ChangeOption":
+					return ChangeOption;
+				case  "Select":
+					return Select;
 			}
 			return null;
 		}
@@ -52,6 +58,10 @@ namespace FlatRedBullet
 					return ZombieDeath;
 				case  "PlayerHit":
 					return PlayerHit;
+				case  "ChangeOption":
+					return ChangeOption;
+				case  "Select":
+					return Select;
 			}
 			return null;
 		}
@@ -66,6 +76,8 @@ namespace FlatRedBullet
 			Shoot = FlatRedBallServices.Load<Microsoft.Xna.Framework.Audio.SoundEffect>(@"content/globalcontent/sounds/shoot", ContentManagerName);
 			ZombieDeath = FlatRedBallServices.Load<Microsoft.Xna.Framework.Audio.SoundEffect>(@"content/globalcontent/sounds/zombiedeath", ContentManagerName);
 			PlayerHit = FlatRedBallServices.Load<Microsoft.Xna.Framework.Audio.SoundEffect>(@"content/globalcontent/sounds/playerhit", ContentManagerName);
+			ChangeOption = FlatRedBallServices.Load<Microsoft.Xna.Framework.Audio.SoundEffect>(@"content/globalcontent/sounds/changeoption", ContentManagerName);
+			Select = FlatRedBallServices.Load<Microsoft.Xna.Framework.Audio.SoundEffect>(@"content/globalcontent/sounds/select", ContentManagerName);
 						IsInitialized = true;
 		}
 		public static void Reload (object whatToReload)
