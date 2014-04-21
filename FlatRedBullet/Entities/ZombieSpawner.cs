@@ -20,6 +20,7 @@ using GuiManager = FlatRedBall.Gui.GuiManager;
 using Keys = Microsoft.Xna.Framework.Input.Keys;
 using Vector3 = Microsoft.Xna.Framework.Vector3;
 using Texture2D = Microsoft.Xna.Framework.Graphics.Texture2D;
+using Microsoft.Xna.Framework;
 
 #endif
 #endregion
@@ -28,15 +29,20 @@ namespace FlatRedBullet.Entities
 {
 	public partial class ZombieSpawner
 	{
+        //AxisAlignedCube debugCube = new AxisAlignedCube();
 		private void CustomInitialize()
 		{
-            Entities.Enemy enemy = new Entities.Enemy();
-            enemy.Position = new Vector3(0, 22, 0);
-            Factories.EnemyFactory.ScreenListReference.Add(enemy);
+            //debugCube.ScaleX = 10;
+            //debugCube.ScaleY = 10;
+            //debugCube.ScaleZ = 10;
+            //debugCube.Visible = true;
+            //debugCube.Color = Color.Green;
 		}
 
 		private void CustomActivity()
 		{
+          //debugCube.Position = this.Position;
+
 
 
 		}

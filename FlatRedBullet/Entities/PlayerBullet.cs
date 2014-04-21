@@ -41,21 +41,22 @@ namespace FlatRedBullet.Entities
             model.CopyAbsoluteToRelative();
             model.AttachTo(collisionCube, false);
 
-            collisionCube.ScaleX = 0.1f;
-            collisionCube.ScaleY = 0.1f;
-            collisionCube.ScaleZ = 0.1f;
+            collisionCube.ScaleX = 2f;
+            collisionCube.ScaleY = 2f;
+            collisionCube.ScaleZ = 2f;
             collisionCube.AttachTo(this, false);
 		}
 
 		private void CustomActivity()
 		{
             model.Update();
-            Velocity += RotationMatrix.Forward * 200;
+            Velocity = RotationMatrix.Forward * 175;            
 		}
 
 		private void CustomDestroy()
 		{
             control.UnloadModel(model);
+            collisionCube.RemoveSelfFromListsBelongingTo();
 		}
 
         private static void CustomLoadStaticContent(string contentManagerName)

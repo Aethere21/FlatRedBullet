@@ -135,5 +135,59 @@ namespace FlatRedBullet.Screens
                 Microsoft.Xna.Framework.Input.Mouse.SetPosition(FlatRedBallServices.GraphicsDevice.Viewport.Width / 2, FlatRedBallServices.GraphicsDevice.Viewport.Height / 2);
             }
         }
+
+        private void SetUpSpawners()
+        {
+            for (int i = 0; i < 13; i++)
+            {
+                Entities.ZombieSpawner spawner = new Entities.ZombieSpawner();
+                switch (i)
+                {
+                    case 0:
+                        spawner.Position = new Vector3(-260, 45, 6);
+                        break;
+                    case 1:
+                        spawner.Position = new Vector3(-380, 45, -190);
+                        break;
+                    case 2:
+                        spawner.Position = new Vector3(-310, 45, -356);
+                        break;
+                    case 3:
+                        spawner.Position = new Vector3(-410, 45, 330);
+                        break;
+                    case 4:
+                        spawner.Position = new Vector3(-315, 45, 330);
+                        break;
+                    case 5:
+                        spawner.Position = new Vector3(-220, 45, 220);
+                        break;
+                    case 6:
+                        spawner.Position = new Vector3(75, 45, -60);
+                        break;
+                    case 7:
+                        spawner.Position = new Vector3(53, 45, -300);
+                        break;
+                    case 8:
+                        spawner.Position = new Vector3(170, 45, -305);
+                        break;
+                    case 9:
+                        spawner.Position = new Vector3(240, 45, -140);
+                        break;
+                    case 10:
+                        spawner.Position = new Vector3(440, 45, -65);
+                        break;
+                    case 11:
+                        spawner.Position = new Vector3(440, 45, 120);
+                        break;
+                    case 12:
+                        spawner.Position = new Vector3(340, 45, 280);
+                        break;
+                    case 13:
+                        spawner.Position = new Vector3(430, 45, 390);
+                        break;
+                }
+                ZombieSpawnerList.Add(spawner);
+            }
+        }
     }
 }

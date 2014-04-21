@@ -43,6 +43,9 @@ namespace FlatRedBullet.Screens
 		private FlatRedBullet.Entities.Player PlayerInstance;
 		private FlatRedBullet.Entities.Gun GunInstance;
 		private FlatRedBullet.Entities.BulletSpawner BulletSpawnerInstance;
+		private PositionedObjectList<FlatRedBullet.Entities.ZombieSpawner> ZombieSpawnerList;
+		public float ZombieSpawnTime = 0.2f;
+		public float SpawnRateIncrease = 0.015f;
 
 		public GameScreen()
 			: base("GameScreen")
@@ -65,6 +68,8 @@ namespace FlatRedBullet.Screens
 			GunInstance.Name = "GunInstance";
 			BulletSpawnerInstance = new FlatRedBullet.Entities.BulletSpawner(ContentManagerName, false);
 			BulletSpawnerInstance.Name = "BulletSpawnerInstance";
+			ZombieSpawnerList = new PositionedObjectList<FlatRedBullet.Entities.ZombieSpawner>();
+			ZombieSpawnerList.Name = "ZombieSpawnerList";
 			
 			
 			PostInitialize();
@@ -117,6 +122,14 @@ namespace FlatRedBullet.Screens
 				PlayerInstance.Activity();
 				GunInstance.Activity();
 				BulletSpawnerInstance.Activity();
+				for (int i = ZombieSpawnerList.Count - 1; i > -1; i--)
+				{
+					if (i < ZombieSpawnerList.Count)
+					{
+						// We do the extra if-check because activity could destroy any number of entities
+						ZombieSpawnerList[i].Activity();
+					}
+				}
 			}
 			else
 			{
@@ -141,6 +154,7 @@ namespace FlatRedBullet.Screens
 			
 			EnemyList.MakeOneWay();
 			PlayerBulletList.MakeOneWay();
+			ZombieSpawnerList.MakeOneWay();
 			if (CityInstance != null)
 			{
 				CityInstance.Destroy();
@@ -169,8 +183,13 @@ namespace FlatRedBullet.Screens
 				BulletSpawnerInstance.Destroy();
 				BulletSpawnerInstance.Detach();
 			}
+			for (int i = ZombieSpawnerList.Count - 1; i > -1; i--)
+			{
+				ZombieSpawnerList[i].Destroy();
+			}
 			EnemyList.MakeTwoWay();
 			PlayerBulletList.MakeTwoWay();
+			ZombieSpawnerList.MakeTwoWay();
 
 			base.Destroy();
 
@@ -204,6 +223,10 @@ namespace FlatRedBullet.Screens
 			PlayerInstance.RemoveFromManagers();
 			GunInstance.RemoveFromManagers();
 			BulletSpawnerInstance.RemoveFromManagers();
+			for (int i = ZombieSpawnerList.Count - 1; i > -1; i--)
+			{
+				ZombieSpawnerList[i].Destroy();
+			}
 		}
 		public virtual void AssignCustomVariables (bool callOnContainedElements)
 		{
@@ -214,6 +237,8 @@ namespace FlatRedBullet.Screens
 				GunInstance.AssignCustomVariables(true);
 				BulletSpawnerInstance.AssignCustomVariables(true);
 			}
+			ZombieSpawnTime = 0.2f;
+			SpawnRateIncrease = 0.015f;
 		}
 		public virtual void ConvertToManuallyUpdated ()
 		{
@@ -229,6 +254,10 @@ namespace FlatRedBullet.Screens
 			PlayerInstance.ConvertToManuallyUpdated();
 			GunInstance.ConvertToManuallyUpdated();
 			BulletSpawnerInstance.ConvertToManuallyUpdated();
+			for (int i = 0; i < ZombieSpawnerList.Count; i++)
+			{
+				ZombieSpawnerList[i].ConvertToManuallyUpdated();
+			}
 		}
 		public static void LoadStaticContent (string contentManagerName)
 		{

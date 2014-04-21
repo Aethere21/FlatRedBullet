@@ -14,6 +14,30 @@
         <string>GLUE</string>
       </Tags>
       <Source>GLUE</Source>
+      <CustomVariables>
+        <CustomVariable>
+          <Properties>
+            <PropertySave>
+              <Name>Type</Name>
+              <ValueAsString>float</ValueAsString>
+            </PropertySave>
+          </Properties>
+          <Name>ZombieSpawnTime</Name>
+          <Type>float</Type>
+          <DefaultValue xsi:type="xsd:float">0.2</DefaultValue>
+        </CustomVariable>
+        <CustomVariable>
+          <Properties>
+            <PropertySave>
+              <Name>Type</Name>
+              <ValueAsString>float</ValueAsString>
+            </PropertySave>
+          </Properties>
+          <Name>SpawnRateIncrease</Name>
+          <Type>float</Type>
+          <DefaultValue xsi:type="xsd:float">0.015</DefaultValue>
+        </CustomVariable>
+      </CustomVariables>
       <Name>Screens\GameScreen</Name>
       <NamedObjects>
         <NamedObjectSave>
@@ -57,6 +81,14 @@
           <SourceType>Entity</SourceType>
           <SourceClassType>Entities\BulletSpawner</SourceClassType>
           <InstanceName>BulletSpawnerInstance</InstanceName>
+          <AttachToContainer>true</AttachToContainer>
+          <IndependentOfCamera>true</IndependentOfCamera>
+        </NamedObjectSave>
+        <NamedObjectSave>
+          <SourceType>FlatRedBallType</SourceType>
+          <SourceClassType>PositionedObjectList&lt;T&gt;</SourceClassType>
+          <SourceClassGenericType>Entities\ZombieSpawner</SourceClassGenericType>
+          <InstanceName>ZombieSpawnerList</InstanceName>
           <AttachToContainer>true</AttachToContainer>
           <IndependentOfCamera>true</IndependentOfCamera>
         </NamedObjectSave>

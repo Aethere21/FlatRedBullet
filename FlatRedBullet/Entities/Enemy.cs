@@ -34,8 +34,11 @@ namespace FlatRedBullet.Entities
         ModelDrawableBatch model = new ModelDrawableBatch("Content/GlobalContent/Models/ZombieModel", true);
         public AxisAlignedCube cube = new AxisAlignedCube();
 
+        public int health;
+
 		private void CustomInitialize()
 		{
+            health = 100;
             control.LoadModel(model);
             model.AttachTo(cube, false);
 
@@ -50,12 +53,24 @@ namespace FlatRedBullet.Entities
 		private void CustomActivity()
 		{
             this.YVelocity = -20;
+            if(this.health <= 0)
+            {
+                this.Destroy();
+            }
+
+            Vector3 directionToCenter = GlobalData.PlayerData.playerPosition - this.Position;
+            directionToCenter.Normalize();
+            this.RotationY = (float)Math.Atan2(directionToCenter.X, directionToCenter.Z) +(float)(Math.PI * 0.5f);
+            this.Velocity.X = 20 * directionToCenter.X;
+            this.Velocity.Z = 20 * directionToCenter.Z;
+
+            model.Update();
 		}
 
 		private void CustomDestroy()
 		{
             control.UnloadModel(model);
-
+            cube.RemoveSelfFromListsBelongingTo();
 		}
 
         private static void CustomLoadStaticContent(string contentManagerName)

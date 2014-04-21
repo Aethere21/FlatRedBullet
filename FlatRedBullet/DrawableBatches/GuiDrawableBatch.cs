@@ -37,7 +37,7 @@ namespace FlatRedBullet.DrawableBatches
 
         public void Draw(Camera camera)
         {
-            spriteBatch.Begin();
+            spriteBatch.Begin(SpriteSortMode.Texture, BlendState.NonPremultiplied, SamplerState.PointClamp, DepthStencilState.None, RasterizerState.CullNone);
             spriteBatch.Draw(crosshairTexture, new Rectangle(FlatRedBallServices.GraphicsDevice.Viewport.Width / 2, FlatRedBallServices.GraphicsDevice.Viewport.Height / 2, crosshairTexture.Width, crosshairTexture.Height), Color.White);
             spriteBatch.End();
         }

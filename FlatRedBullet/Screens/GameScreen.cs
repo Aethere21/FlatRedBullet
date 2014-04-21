@@ -32,6 +32,16 @@ namespace FlatRedBullet.Screens
 	{
         DrawableBatches.GuiDrawableBatch gui = new DrawableBatches.GuiDrawableBatch();
 
+        double mLastSpawnTime;
+        bool IsTimeToSpawn
+        {
+            get
+            {
+                float spawnFreguency = 1 / ZombieSpawnTime;
+                return PauseAdjustedSecondsSince(mLastSpawnTime) > spawnFreguency;
+            }
+        }
+
         void CustomInitialize()
 		{
             SetUpCamera(false);
@@ -40,18 +50,24 @@ namespace FlatRedBullet.Screens
             SpriteManager.AddZBufferedDrawableBatch(gui);
             SpriteManager.AddPositionedObject(gui);
             SetUpGun();
-            ZombieSpawnActivity();
-
+            SetUpSpawners();
 		}
-
 
         void CustomActivity(bool firstTimeCalled)
         {
             if (FlatRedBallServices.Game.IsActive)
             {
                 CameraActivity();
+                //FlatRedBall.Debugging.Debugger.Write("SX: " + EnemyList[0].cube.ScaleX + "\nSY: " + EnemyList[0].cube.ScaleY + "\nSZ: " + EnemyList[0].cube.ScaleZ + "\nBulletAmmount: " + PlayerBulletList.Count + "\nZombie 1 Position: " + EnemyList[0].Position + );
+                FlatRedBall.Debugging.Debugger.Write(EnemyList.Count);
+                
+                if(IsTimeToSpawn)
+                {
+                    SpawnActivity();
+                }
+                this.ZombieSpawnTime += TimeManager.SecondDifference * this.SpawnRateIncrease;
 
-                FlatRedBall.Debugging.Debugger.Write("SX: " + EnemyList[0].cube.ScaleX + "\nSY: " + EnemyList[0].cube.ScaleY + "\nSZ: " + EnemyList[0].cube.ScaleZ + "\nBulletAmmount: " + PlayerBulletList.Count + "\nZombie 1 Position: " + EnemyList[0].Position);
+                GlobalData.PlayerData.playerPosition = PlayerInstance.Position;
             }
 
             CollisionActivity();
@@ -86,6 +102,18 @@ namespace FlatRedBullet.Screens
                     EnemyList[i].cube.CollideAgainstMove(cube, 0, 1);
                 }
             }
+
+            for (int i = EnemyList.Count - 1; i >= 0; i--)
+            {
+                for (int x = PlayerBulletList.Count - 1; x >= 0; x--)
+                {
+                    if(PlayerBulletList[x].collisionCube.CollideAgainst(EnemyList[i].cube))
+                    {
+                        EnemyList[i].health -= 15;
+                        PlayerBulletList[x].Destroy();
+                    }
+                }
+            }
         }
 
         private void SetUpGun()
@@ -106,9 +134,13 @@ namespace FlatRedBullet.Screens
             BulletSpawnerInstance.RotationY = PlayerInstance.RotationY;
         }
 
-        private void ZombieSpawnActivity()
+        private void SpawnActivity()
         {
-
+            int randSpawner = FlatRedBallServices.Random.Next(0, ZombieSpawnerList.Count);
+            Entities.Enemy zombie = new Entities.Enemy();
+            zombie.Position = ZombieSpawnerList[randSpawner].Position;
+            EnemyList.Add(zombie);
+            mLastSpawnTime = PauseAdjustedCurrentTime;
         }
 	}
 }
