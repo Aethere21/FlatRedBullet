@@ -23,6 +23,7 @@ using Keys = Microsoft.Xna.Framework.Input.Keys;
 using Vector3 = Microsoft.Xna.Framework.Vector3;
 using Texture2D = Microsoft.Xna.Framework.Graphics.Texture2D;
 using FlatRedBullet.DrawableBatches;
+using Microsoft.Xna.Framework;
 #endif
 #endregion
 
@@ -48,6 +49,14 @@ namespace FlatRedBullet.Screens
             startModel.Position = new Vector3(-65, 0, -200);
             exitModel.Position = new Vector3(65, 5, -200);
 
+            CameraSetup.ResetCamera(Camera.Main);
+         
+            Camera.Main.UpVector = new Vector3(0, 1, 0);
+            Camera.Main.RotationX = 0;
+            Camera.Main.RotationY = 0;
+            Camera.Main.RotationZ = 0;
+            Camera.Main.CameraCullMode = FlatRedBall.Graphics.CameraCullMode.None;
+            Camera.Main.FarClipPlane = 5000.0f;
             Camera.Main.Position = new Vector3(8, 0, 40);
 		}
 
@@ -97,9 +106,9 @@ namespace FlatRedBullet.Screens
 
 		void CustomDestroy()
 		{
-            control.UnloadModelOneWay(startModel);
-            control.UnloadModelOneWay(exitModel);
-            control.UnloadModelOneWay(arrowModel);
+            control.UnloadModel(startModel);
+            control.UnloadModel(exitModel);
+            control.UnloadModel(arrowModel);
 		}
 
         static void CustomLoadStaticContent(string contentManagerName)

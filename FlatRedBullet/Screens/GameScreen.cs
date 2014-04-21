@@ -91,6 +91,11 @@ namespace FlatRedBullet.Screens
                 
             }
 
+            if(InputManager.Keyboard.KeyReleased(Keys.J))
+            {
+                GlobalData.PlayerData.Health = 0;
+            }
+
             CollisionActivity();
             //BulletActivity();
         }
@@ -99,6 +104,8 @@ namespace FlatRedBullet.Screens
 		{
             SpriteManager.RemoveDrawableBatch(gui);
             SpriteManager.RemovePositionedObject(gui);
+
+            Camera.Main.Detach();
 		}
 
         static void CustomLoadStaticContent(string contentManagerName)

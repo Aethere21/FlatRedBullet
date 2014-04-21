@@ -20,12 +20,14 @@ namespace FlatRedBullet.DrawableBatches
 
         public void UnloadModel(ModelDrawableBatch model)
         {
+            model.Destroy();
             SpriteManager.RemoveDrawableBatch(model);
             SpriteManager.RemovePositionedObject(model);
         }
 
         public void UnloadModelOneWay(ModelDrawableBatch model)
         {
+            model.Destroy();
             SpriteManager.RemoveDrawableBatchOneWay(model);
             SpriteManager.RemovePositionedObject(model);
         }
