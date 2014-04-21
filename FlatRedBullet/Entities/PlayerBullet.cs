@@ -32,8 +32,8 @@ namespace FlatRedBullet.Entities
 	{
 
         DrawableBatchControl control = new DrawableBatchControl();
-        ModelDrawableBatch model = new ModelDrawableBatch("Content/GlobalContent/Models/BulletModel", true);
-        AxisAlignedCube collisionCube = new AxisAlignedCube();
+        public ModelDrawableBatch model = new ModelDrawableBatch("Content/GlobalContent/Models/BulletModel", true);
+        public AxisAlignedCube collisionCube = new AxisAlignedCube();
 		private void CustomInitialize()
 		{
             control.LoadModel(model);
@@ -50,8 +50,7 @@ namespace FlatRedBullet.Entities
 		private void CustomActivity()
 		{
             model.Update();
-
-            this.Velocity += this.RotationMatrix.Forward * 200;
+            Velocity += RotationMatrix.Forward * 200;
 		}
 
 		private void CustomDestroy()

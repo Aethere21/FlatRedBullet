@@ -141,6 +141,11 @@
     <Compile Include="Entities\PlayerBullet.Generated.cs">
       <DependentUpon>PlayerBullet.cs</DependentUpon>
     </Compile>
+    <Compile Include="Entities\ZombieSpawner.cs" />
+    <Compile Include="Entities\ZombieSpawner.Generated.cs">
+      <DependentUpon>ZombieSpawner.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Factories\EnemyFactory.Generated.cs" />
     <Compile Include="Factories\PlayerBulletFactory.Generated.cs" />
     <Compile Include="GlobalContent.Generated.cs" />
     <Compile Include="Performance\IEntityFactory.Generated.cs" />

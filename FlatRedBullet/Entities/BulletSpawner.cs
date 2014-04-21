@@ -58,7 +58,6 @@ namespace FlatRedBullet.Entities
                 bullet.Position.Z = this.Position.Z;
                 Factories.PlayerBulletFactory.ScreenListReference.Add(bullet);
             }
-
         }
 
 		private void CustomDestroy()

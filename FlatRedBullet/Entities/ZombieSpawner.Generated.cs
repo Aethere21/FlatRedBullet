@@ -6,7 +6,6 @@ using GuiManager = FlatRedBall.Gui.GuiManager;
 using FlatRedBullet.Screens;
 using FlatRedBall.Graphics;
 using FlatRedBall.Math;
-using FlatRedBullet.Performance;
 using FlatRedBullet.Entities;
 using FlatRedBullet.Factories;
 using FlatRedBall;
@@ -35,7 +34,7 @@ using Model = Microsoft.Xna.Framework.Graphics.Model;
 
 namespace FlatRedBullet.Entities
 {
-	public partial class Enemy : PositionedObject, IDestroyable, IPoolable
+	public partial class ZombieSpawner : PositionedObject, IDestroyable
 	{
         // This is made global so that static lazy-loaded content can access it.
         public static string ContentManagerName
@@ -52,23 +51,21 @@ namespace FlatRedBullet.Entities
 		static List<string> mRegisteredUnloads = new List<string>();
 		static List<string> LoadedContentManagers = new List<string>();
 		
-		public int Index { get; set; }
-		public bool Used { get; set; }
 		protected Layer LayerProvidedByContainer = null;
 
-        public Enemy()
+        public ZombieSpawner()
             : this(FlatRedBall.Screens.ScreenManager.CurrentScreen.ContentManagerName, true)
         {
 
         }
 
-        public Enemy(string contentManagerName) :
+        public ZombieSpawner(string contentManagerName) :
             this(contentManagerName, true)
         {
         }
 
 
-        public Enemy(string contentManagerName, bool addToManagers) :
+        public ZombieSpawner(string contentManagerName, bool addToManagers) :
 			base()
 		{
 			// Don't delete this:
@@ -118,10 +115,6 @@ namespace FlatRedBullet.Entities
 		{
 			// Generated Destroy
 			SpriteManager.RemovePositionedObject(this);
-			if (Used)
-			{
-				EnemyFactory.MakeUnused(this, false);
-			}
 			
 
 
@@ -179,7 +172,7 @@ namespace FlatRedBullet.Entities
 				{
 					if (!mRegisteredUnloads.Contains(ContentManagerName) && ContentManagerName != FlatRedBallServices.GlobalContentManager)
 					{
-						FlatRedBallServices.GetContentManagerByName(ContentManagerName).AddUnloadMethod("EnemyStaticUnload", UnloadStaticContent);
+						FlatRedBallServices.GetContentManagerByName(ContentManagerName).AddUnloadMethod("ZombieSpawnerStaticUnload", UnloadStaticContent);
 						mRegisteredUnloads.Add(ContentManagerName);
 					}
 				}
@@ -190,7 +183,7 @@ namespace FlatRedBullet.Entities
 				{
 					if (!mRegisteredUnloads.Contains(ContentManagerName) && ContentManagerName != FlatRedBallServices.GlobalContentManager)
 					{
-						FlatRedBallServices.GetContentManagerByName(ContentManagerName).AddUnloadMethod("EnemyStaticUnload", UnloadStaticContent);
+						FlatRedBallServices.GetContentManagerByName(ContentManagerName).AddUnloadMethod("ZombieSpawnerStaticUnload", UnloadStaticContent);
 						mRegisteredUnloads.Add(ContentManagerName);
 					}
 				}

@@ -57,6 +57,11 @@
       <Processor>ModelProcessor</Processor>
       <Name>GunModel</Name>
     </Compile>
+    <Compile Include="GlobalContent\Models\ZombieModel.fbx">
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <Name>ZombieModel</Name>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="GlobalContent\Textures\Crosshair.png">

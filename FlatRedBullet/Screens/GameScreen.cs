@@ -40,6 +40,8 @@ namespace FlatRedBullet.Screens
             SpriteManager.AddZBufferedDrawableBatch(gui);
             SpriteManager.AddPositionedObject(gui);
             SetUpGun();
+            ZombieSpawnActivity();
+
 		}
 
 
@@ -49,13 +51,11 @@ namespace FlatRedBullet.Screens
             {
                 CameraActivity();
 
-                FlatRedBall.Debugging.Debugger.Write("Gun Pos: " + GunInstance.RelativePosition + "\nGunRotationX: " + GunInstance.RelativeRotationX + "\nRY: " + GunInstance.RelativeRotationY + "\nRZ: " + GunInstance.RelativeRotationZ);
+                FlatRedBall.Debugging.Debugger.Write("SX: " + EnemyList[0].cube.ScaleX + "\nSY: " + EnemyList[0].cube.ScaleY + "\nSZ: " + EnemyList[0].cube.ScaleZ + "\nBulletAmmount: " + PlayerBulletList.Count + "\nZombie 1 Position: " + EnemyList[0].Position);
             }
 
             CollisionActivity();
-
-            BulletSpawnerInstance.RotationY = PlayerInstance.RotationY;
-
+            BulletActivity();
         }
 
 		void CustomDestroy()
@@ -73,6 +73,18 @@ namespace FlatRedBullet.Screens
             foreach (AxisAlignedCube cube in CityInstance.collisionCubes)
             {
                 PlayerInstance.collisionCube.CollideAgainstMove(cube, 0, 1);
+                for (int i = PlayerBulletList.Count - 1; i >= 0; i--)
+                {
+                    if(PlayerBulletList[i].collisionCube.CollideAgainst(cube))
+                    {
+                        PlayerBulletList[i].Destroy();
+                    }
+                }
+
+                for (int i = EnemyList.Count - 1; i >= 0; i--)
+                {
+                    EnemyList[i].cube.CollideAgainstMove(cube, 0, 1);
+                }
             }
         }
 
@@ -87,6 +99,16 @@ namespace FlatRedBullet.Screens
             BulletSpawnerInstance.RelativePosition.Y = -3.5f;
             BulletSpawnerInstance.RelativePosition.Z = -20f;
             BulletSpawnerInstance.RelativePosition.X = 2.5f;
+        }
+
+        private void BulletActivity()
+        {
+            BulletSpawnerInstance.RotationY = PlayerInstance.RotationY;
+        }
+
+        private void ZombieSpawnActivity()
+        {
+
         }
 	}
 }

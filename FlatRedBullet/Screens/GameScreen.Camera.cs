@@ -111,14 +111,14 @@ namespace FlatRedBullet.Screens
         {
             if (debugMode)
             {
-                int xMovement = GuiManager.Cursor.ScreenXChange;
-                int yMovement = GuiManager.Cursor.ScreenYChange;
+                //int xMovement = GuiManager.Cursor.ScreenXChange;
+                //int yMovement = GuiManager.Cursor.ScreenYChange;
 
-                Vector3 absoluteYAxis = new Vector3(0, 1, 0);
-                Camera.Main.RotationMatrix *= Microsoft.Xna.Framework.Matrix.CreateFromAxisAngle(absoluteYAxis, xMovement * -cameraRotationSpeed);
+                //Vector3 absoluteYAxis = new Vector3(0, 1, 0);
+                //Camera.Main.RotationMatrix *= Microsoft.Xna.Framework.Matrix.CreateFromAxisAngle(absoluteYAxis, xMovement * -cameraRotationSpeed);
 
-                Vector3 relativeXAxis = Camera.Main.RotationMatrix.Right;
-                Camera.Main.RotationMatrix *= Microsoft.Xna.Framework.Matrix.CreateFromAxisAngle(relativeXAxis, yMovement * -cameraRotationSpeed);
+                //Vector3 relativeXAxis = Camera.Main.RotationMatrix.Right;
+                //Camera.Main.RotationMatrix *= Microsoft.Xna.Framework.Matrix.CreateFromAxisAngle(relativeXAxis, yMovement * -cameraRotationSpeed);
             }
             else
             {

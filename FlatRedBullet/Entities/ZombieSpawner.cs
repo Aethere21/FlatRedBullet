@@ -20,41 +20,30 @@ using GuiManager = FlatRedBall.Gui.GuiManager;
 using Keys = Microsoft.Xna.Framework.Input.Keys;
 using Vector3 = Microsoft.Xna.Framework.Vector3;
 using Texture2D = Microsoft.Xna.Framework.Graphics.Texture2D;
-using FlatRedBullet.DrawableBatches;
-using Microsoft.Xna.Framework;
 
 #endif
 #endregion
 
 namespace FlatRedBullet.Entities
 {
-	public partial class Enemy
+	public partial class ZombieSpawner
 	{
-        DrawableBatchControl control = new DrawableBatchControl();
-        ModelDrawableBatch model = new ModelDrawableBatch("Content/GlobalContent/Models/ZombieModel", true);
-        public AxisAlignedCube cube = new AxisAlignedCube();
-
 		private void CustomInitialize()
 		{
-            control.LoadModel(model);
-            model.AttachTo(cube, false);
-
-            cube.AttachTo(this, false);
-            cube.Visible = true;
-            cube.Color = Color.Green;
-            cube.ScaleX = 5;
-            cube.ScaleY = 8;
-            cube.ScaleZ = 4;
+            Entities.Enemy enemy = new Entities.Enemy();
+            enemy.Position = new Vector3(0, 22, 0);
+            Factories.EnemyFactory.ScreenListReference.Add(enemy);
 		}
 
 		private void CustomActivity()
 		{
-            this.YVelocity = -20;
+
+
 		}
 
 		private void CustomDestroy()
 		{
-            control.UnloadModel(model);
+
 
 		}
 

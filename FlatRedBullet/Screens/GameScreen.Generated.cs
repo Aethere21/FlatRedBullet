@@ -79,6 +79,7 @@ namespace FlatRedBullet.Screens
 // Generated AddToManagers
 		public override void AddToManagers ()
 		{
+			EnemyFactory.Initialize(EnemyList, ContentManagerName);
 			PlayerBulletFactory.Initialize(PlayerBulletList, ContentManagerName);
 			CityInstance.AddToManagers(mLayer);
 			PlayerInstance.AddToManagers(mLayer);
@@ -135,6 +136,7 @@ namespace FlatRedBullet.Screens
 		public override void Destroy()
 		{
 			// Generated Destroy
+			EnemyFactory.Destroy();
 			PlayerBulletFactory.Destroy();
 			
 			EnemyList.MakeOneWay();
